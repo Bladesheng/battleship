@@ -64,7 +64,7 @@ var Ship = /*#__PURE__*/function () {
 
     __classPrivateFieldSet(this, _Ship_hull, [], "f");
 
-    for (var i = 0; i < length; i++) {
+    while (__classPrivateFieldGet(this, _Ship_hull, "f").length < length) {
       __classPrivateFieldGet(this, _Ship_hull, "f").push(0);
     }
 

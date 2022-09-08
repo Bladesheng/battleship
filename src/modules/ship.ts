@@ -7,7 +7,7 @@ export class Ship {
     this.#length = length;
 
     this.#hull = [];
-    for (let i = 0; i < length; i++) {
+    while (this.#hull.length < length) {
       this.#hull.push(0);
     }
 
