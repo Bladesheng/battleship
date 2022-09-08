@@ -9,8 +9,48 @@
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.scss */ "./src/style.scss");
+/* harmony import */ var _modules_ship__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/ship */ "./src/modules/ship.ts");
 
-console.log("hello world");
+
+var testShip = new _modules_ship__WEBPACK_IMPORTED_MODULE_1__.Ship(2);
+console.log(testShip.length);
+
+/***/ }),
+
+/***/ "./src/modules/ship.ts":
+/*!*****************************!*\
+  !*** ./src/modules/ship.ts ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Ship": () => (/* binding */ Ship)
+/* harmony export */ });
+var Ship =
+/** @class */
+function () {
+  function Ship(length) {
+    this.hull = [];
+    this.length = length;
+
+    for (var i = 0; i < length; i++) {
+      this.hull.push(0);
+    }
+  }
+
+  Ship.prototype.hit = function (position) {
+    this.hull[position] = 1;
+  };
+
+  Ship.prototype.isSunk = function () {
+    return !this.hull.includes(0);
+  };
+
+  return Ship;
+}();
+
+
 
 /***/ }),
 

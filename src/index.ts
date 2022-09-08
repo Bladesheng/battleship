@@ -1,3 +1,6 @@
 import "./style.scss";
+import { Ship } from "./modules/ship";
 
-console.log("hello world");
+const testShip = new Ship(2);
+
+console.log(testShip.length);
