@@ -31,6 +31,10 @@ export class Gameboard {
     }
   }
 
+  receiveAttack(xCoords: number, yCoords: number) {
+    this.#board[xCoords][yCoords].hit = true;
+  }
+
   get board() {
     return this.#board;
   }
