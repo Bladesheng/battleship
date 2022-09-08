@@ -1,4 +1,4 @@
-import { IShip } from "./ship";
+import { Ship } from "./ship";
 
 export interface Itile {
   shipInfo: IshipInfo;
@@ -6,7 +6,7 @@ export interface Itile {
 }
 
 export interface IshipInfo {
-  ship?: IShip;
+  ship?: Ship;
   hullIndex?: number;
 }
 
@@ -33,8 +33,16 @@ export class Gameboard {
     }
   }
 
-  receiveAttack(xCoords: number, yCoords: number) {
-    this.#board[xCoords][yCoords].hit = true;
+  receiveAttack(tile: Itile) {
+    tile.hit = true;
+
+    // if there is a ship in the tile
+    if (!this.isTileEmpty(tile)) {
+      const hullIndex = tile.shipInfo.hullIndex;
+      if (hullIndex !== undefined) {
+        tile.shipInfo.ship?.hit(hullIndex);
+      }
+    }
   }
 
   isTileEmpty(tile: Itile) {
@@ -42,7 +50,7 @@ export class Gameboard {
   }
 
   // places a single part of hull
-  placeHullPart(ship: IShip, hullIndex: number, tile: Itile) {
+  placeHullPart(ship: Ship, hullIndex: number, tile: Itile) {
     const shipInfo = tile.shipInfo;
 
     shipInfo.ship = ship;

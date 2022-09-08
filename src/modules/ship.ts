@@ -1,9 +1,3 @@
-export interface IShip {
-  length: number;
-  hull: boolean[];
-  sunk: boolean;
-}
-
 export class Ship {
   #length: number;
   #hull: boolean[];
