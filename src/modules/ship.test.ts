@@ -7,13 +7,13 @@ test("Ship length", () => {
 
 test("Ship hull", () => {
   const testShip = new Ship(3);
-  expect(testShip.hull).toEqual([0, 0, 0]);
+  expect(testShip.hull).toEqual([false, false, false]);
 });
 
 test("Ship hit", () => {
   const testShip = new Ship(3);
   testShip.hit(1);
-  expect(testShip.hull).toEqual([0, 1, 0]);
+  expect(testShip.hull).toEqual([false, true, false]);
 });
 
 test("Ship is not sunk", () => {
