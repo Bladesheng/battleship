@@ -31,8 +31,8 @@ var Ship =
 /** @class */
 function () {
   function Ship(length) {
-    this.hull = [];
     this.length = length;
+    this.hull = [];
 
     for (var i = 0; i < length; i++) {
       this.hull.push(0);

@@ -1,10 +1,11 @@
 export class Ship {
   length: number;
-  hull: number[] = [];
+  hull: number[];
 
   constructor(length: number) {
     this.length = length;
 
+    this.hull = [];
     for (let i = 0; i < length; i++) {
       this.hull.push(0);
     }
