@@ -27,30 +27,82 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Ship": () => (/* binding */ Ship)
 /* harmony export */ });
-var Ship =
-/** @class */
-function () {
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+var __classPrivateFieldSet = undefined && undefined.__classPrivateFieldSet || function (receiver, state, value, kind, f) {
+  if (kind === "m") throw new TypeError("Private method is not writable");
+  if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+  if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+  return kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value), value;
+};
+
+var __classPrivateFieldGet = undefined && undefined.__classPrivateFieldGet || function (receiver, state, kind, f) {
+  if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+  if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+  return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+
+var _Ship_instances, _Ship_length, _Ship_hull, _Ship_sunk, _Ship_checkIfSunk;
+
+var Ship = /*#__PURE__*/function () {
   function Ship(length) {
-    this.length = length;
-    this.hull = [];
+    _classCallCheck(this, Ship);
+
+    _Ship_instances.add(this);
+
+    _Ship_length.set(this, void 0);
+
+    _Ship_hull.set(this, void 0);
+
+    _Ship_sunk.set(this, void 0);
+
+    __classPrivateFieldSet(this, _Ship_length, length, "f");
+
+    __classPrivateFieldSet(this, _Ship_hull, [], "f");
 
     for (var i = 0; i < length; i++) {
-      this.hull.push(0);
+      __classPrivateFieldGet(this, _Ship_hull, "f").push(0);
     }
+
+    __classPrivateFieldSet(this, _Ship_sunk, false, "f");
   }
 
-  Ship.prototype.hit = function (position) {
-    this.hull[position] = 1;
-  };
+  _createClass(Ship, [{
+    key: "hit",
+    value: function hit(position) {
+      __classPrivateFieldGet(this, _Ship_hull, "f")[position] = 1;
 
-  Ship.prototype.isSunk = function () {
-    return !this.hull.includes(0);
-  };
+      __classPrivateFieldGet(this, _Ship_instances, "m", _Ship_checkIfSunk).call(this);
+    }
+  }, {
+    key: "length",
+    get: function get() {
+      return __classPrivateFieldGet(this, _Ship_length, "f");
+    }
+  }, {
+    key: "hull",
+    get: function get() {
+      return __classPrivateFieldGet(this, _Ship_hull, "f");
+    }
+  }, {
+    key: "sunk",
+    get: function get() {
+      return __classPrivateFieldGet(this, _Ship_sunk, "f");
+    }
+  }]);
 
   return Ship;
 }();
-
-
+_Ship_length = new WeakMap(), _Ship_hull = new WeakMap(), _Ship_sunk = new WeakMap(), _Ship_instances = new WeakSet(), _Ship_checkIfSunk = function _Ship_checkIfSunk() {
+  // ship can only be sunked, it can't be unsunked
+  if (!this.hull.includes(0)) {
+    __classPrivateFieldSet(this, _Ship_sunk, true, "f");
+  }
+};
 
 /***/ }),
 

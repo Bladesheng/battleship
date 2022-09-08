@@ -18,13 +18,13 @@ test("Ship hit", () => {
 
 test("Ship is not sunk", () => {
   const testShip = new Ship(3);
-  expect(testShip.isSunk()).toBe(false);
+  expect(testShip.sunk).toBe(false);
 
   testShip.hit(1);
-  expect(testShip.isSunk()).toBe(false);
+  expect(testShip.sunk).toBe(false);
 
   testShip.hit(0);
-  expect(testShip.isSunk()).toBe(false);
+  expect(testShip.sunk).toBe(false);
 });
 
 test("Ship is sunk", () => {
@@ -35,5 +35,5 @@ test("Ship is sunk", () => {
   testShip.hit(1);
   testShip.hit(2);
 
-  expect(testShip.isSunk()).toBe(true);
+  expect(testShip.sunk).toBe(true);
 });
