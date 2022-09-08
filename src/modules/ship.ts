@@ -4,7 +4,7 @@ export interface IShip {
   sunk: boolean;
 }
 
-export class Ship implements IShip {
+export class Ship {
   #length: number;
   #hull: boolean[];
   #sunk: boolean;

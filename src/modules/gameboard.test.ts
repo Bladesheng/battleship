@@ -1,4 +1,4 @@
-import { Gameboard, Itile, IshipInfo } from "./gameboard";
+import { Gameboard } from "./gameboard";
 import { Ship } from "./ship";
 
 test("Create empty 10x10 board", () => {
