@@ -83,13 +83,26 @@ test("Sink 1x1 ship", () => {
   expect(tile.shipInfo.ship?.sunk).toBe(true);
 });
 
-test("Place 2x1 ship", () => {
+test("Place 2x1 ship horizontally", () => {
   const testBoard = new Gameboard(3, 3);
   const tile1 = testBoard.board[1][2];
   const tile2 = testBoard.board[2][2];
 
   const testShip = new Ship(2);
   testBoard.placeShip(testShip, "horizontal", 1, 2);
+
+  // the tiles are not empty because the ship is there
+  expect(testBoard.isTileEmpty(tile1)).toBe(false);
+  expect(testBoard.isTileEmpty(tile2)).toBe(false);
+});
+
+test("Place 2x1 ship vertically", () => {
+  const testBoard = new Gameboard(3, 3);
+  const tile1 = testBoard.board[1][1];
+  const tile2 = testBoard.board[1][2];
+
+  const testShip = new Ship(2);
+  testBoard.placeShip(testShip, "vertical", 1, 1);
 
   // the tiles are not empty because the ship is there
   expect(testBoard.isTileEmpty(tile1)).toBe(false);
@@ -149,4 +162,3 @@ test("Try to place 2x1 ship at invalid location - outside of board", () => {
 });
 
 // test placing over another ship error
-// test horizontal ship placement
