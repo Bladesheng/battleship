@@ -98,15 +98,15 @@ test("Place 2x1 ship", () => {
 
 test("Shoot at 2x1 ship", () => {
   const testBoard = new Gameboard(3, 3);
-  const tile1 = testBoard.board[1][2];
+  const tile = testBoard.board[1][2];
 
   const testShip = new Ship(2);
   testBoard.placeShip(testShip, "horizontal", 1, 2);
 
-  testBoard.receiveAttack(tile1);
+  testBoard.receiveAttack(tile);
 
   // the ship shouldn't be sunk after taking 1 hit
-  expect(tile1.shipInfo.ship?.sunk).toBe(false);
+  expect(tile.shipInfo.ship?.sunk).toBe(false);
 });
 
 test("Sink 2x1 ship", () => {
@@ -123,3 +123,30 @@ test("Sink 2x1 ship", () => {
   // the ship should be sunk after taking 2 hits
   expect(tile1.shipInfo.ship?.sunk).toBe(true);
 });
+
+test("Try to place 2x1 ship at invalid location - outside of board", () => {
+  const testBoard = new Gameboard(3, 3);
+  const tile = testBoard.board[2][2];
+
+  const testShip = new Ship(2);
+
+  const errorMsg = "Gameboard Error: Ship would be placed outside of board";
+
+  // part of ship would be outside of board
+  expect(() => {
+    testBoard.placeShip(testShip, "horizontal", 2, 2);
+  }).toThrow(errorMsg);
+
+  // part of ship would be outside of board
+  expect(() => {
+    testBoard.placeShip(testShip, "vertical", 2, 2);
+  }).toThrow(errorMsg);
+
+  // the whole ship would be outside of board
+  expect(() => {
+    testBoard.placeShip(testShip, "horizontal", 69, 69);
+  }).toThrow(errorMsg);
+});
+
+// test placing over another ship error
+// test horizontal ship placement

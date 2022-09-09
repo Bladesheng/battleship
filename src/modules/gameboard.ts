@@ -63,15 +63,26 @@ export class Gameboard {
     xCoords: number,
     yCoords: number
   ) {
+    function isValid(board: Itile[][], xCoords: number, yCoords: number) {
+      // check if ship would be placed outside of board
+      if (xCoords > board.length - 1 || yCoords > board[xCoords].length - 1) {
+        throw new Error(
+          "Gameboard Error: Ship would be placed outside of board"
+        );
+      }
+    }
+
     const length = ship.length;
 
     // select the tiles where ship will be placed
     const tiles: Itile[] = [];
     for (let i = 0; i < length; i++) {
       if (direction === "horizontal") {
+        isValid(this.#board, xCoords + i, yCoords);
         const tile = this.#board[xCoords + i][yCoords];
         tiles.push(tile);
       } else if (direction === "vertical") {
+        isValid(this.#board, xCoords, yCoords + 1);
         const tile = this.#board[xCoords][yCoords + i];
         tiles.push(tile);
       }
