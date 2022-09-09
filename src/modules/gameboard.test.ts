@@ -139,7 +139,6 @@ test("Sink 2x1 ship", () => {
 
 test("Try to place 2x1 ship at invalid location - outside of board", () => {
   const testBoard = new Gameboard(3, 3);
-  const tile = testBoard.board[2][2];
 
   const testShip = new Ship(2);
 
@@ -161,4 +160,18 @@ test("Try to place 2x1 ship at invalid location - outside of board", () => {
   }).toThrow(errorMsg);
 });
 
-// test placing over another ship error
+test("Try to place 2 different ships over each other", () => {
+  const testBoard = new Gameboard(3, 3);
+
+  const testShip1 = new Ship(2);
+  const testShip2 = new Ship(2);
+
+  testBoard.placeShip(testShip1, "horizontal", 1, 1);
+
+  const errorMsg =
+    "Gameboard Error: Another ship is already placed at that location";
+
+  expect(() => {
+    testBoard.placeShip(testShip2, "horizontal", 1, 1);
+  }).toThrow(errorMsg);
+});
