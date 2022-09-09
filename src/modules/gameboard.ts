@@ -108,6 +108,14 @@ export class Gameboard {
     this.#shipList.push(ship);
   }
 
+  checkIfAllSunk() {
+    const notSunkShips = this.#shipList.filter((ship) => {
+      return !ship.sunk;
+    });
+
+    return notSunkShips.length === 0; // if all ships are sunk, there won't be any in the array
+  }
+
   get board() {
     return this.#board;
   }

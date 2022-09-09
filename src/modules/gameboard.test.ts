@@ -185,3 +185,24 @@ test("Add ship to shiplist", () => {
 
   expect(testBoard.shipList).toContain(testShip);
 });
+
+test("Check if all ships are sunk", () => {
+  const testBoard = new Gameboard(3, 3);
+
+  const tile1 = testBoard.board[1][1];
+  const tile2 = testBoard.board[1][2];
+
+  const testShip1 = new Ship(1);
+  const testShip2 = new Ship(1);
+
+  testBoard.placeShip(testShip1, "horizontal", 1, 1);
+  testBoard.placeShip(testShip2, "horizontal", 1, 2);
+
+  expect(testBoard.checkIfAllSunk()).toBe(false); // nothing is sunk yet
+
+  testBoard.receiveAttack(tile1);
+  expect(testBoard.checkIfAllSunk()).toBe(false); // ship 1 is sunk, but ship 2 is ok
+
+  testBoard.receiveAttack(tile2);
+  expect(testBoard.checkIfAllSunk()).toBe(true); // both ships are sunk
+});
