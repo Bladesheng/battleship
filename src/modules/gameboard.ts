@@ -12,9 +12,11 @@ export interface IshipInfo {
 
 export class Gameboard {
   #board: Itile[][];
+  #shipList: Ship[];
 
   constructor(width: number, height: number) {
     this.#board = [];
+    this.#shipList = [];
 
     // construct columns ("x" coordinates)
     for (let i = width; i > 0; i--) {
@@ -102,9 +104,15 @@ export class Gameboard {
     tiles.forEach((tile, hullIndex) => {
       this.placeHullPart(ship, hullIndex, tile);
     });
+
+    this.#shipList.push(ship);
   }
 
   get board() {
     return this.#board;
+  }
+
+  get shipList() {
+    return this.#shipList;
   }
 }

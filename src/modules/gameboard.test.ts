@@ -175,3 +175,13 @@ test("Try to place 2 different ships over each other", () => {
     testBoard.placeShip(testShip2, "horizontal", 1, 1);
   }).toThrow(errorMsg);
 });
+
+test("Add ship to shiplist", () => {
+  const testBoard = new Gameboard(3, 3);
+
+  const testShip = new Ship(2);
+
+  testBoard.placeShip(testShip, "horizontal", 1, 1);
+
+  expect(testBoard.shipList).toContain(testShip);
+});
