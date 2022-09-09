@@ -70,7 +70,7 @@ test("Manually place a 1x1 ship", () => {
   expect(testBoard.isTileEmpty(tile)).toBe(false);
 });
 
-test("Shoot at 1x1 ship", () => {
+test("Sink 1x1 ship", () => {
   const testBoard = new Gameboard(3, 3);
   const tile = testBoard.board[1][2];
 
@@ -81,4 +81,45 @@ test("Shoot at 1x1 ship", () => {
 
   // the 1x1 ship should be sunk after being hit
   expect(tile.shipInfo.ship?.sunk).toBe(true);
+});
+
+test("Place 2x1 ship", () => {
+  const testBoard = new Gameboard(3, 3);
+  const tile1 = testBoard.board[1][2];
+  const tile2 = testBoard.board[2][2];
+
+  const testShip = new Ship(2);
+  testBoard.placeShip(testShip, "horizontal", 1, 2);
+
+  // the tiles are not empty because the ship is there
+  expect(testBoard.isTileEmpty(tile1)).toBe(false);
+  expect(testBoard.isTileEmpty(tile2)).toBe(false);
+});
+
+test("Shoot at 2x1 ship", () => {
+  const testBoard = new Gameboard(3, 3);
+  const tile1 = testBoard.board[1][2];
+
+  const testShip = new Ship(2);
+  testBoard.placeShip(testShip, "horizontal", 1, 2);
+
+  testBoard.receiveAttack(tile1);
+
+  // the ship shouldn't be sunk after taking 1 hit
+  expect(tile1.shipInfo.ship?.sunk).toBe(false);
+});
+
+test("Sink 2x1 ship", () => {
+  const testBoard = new Gameboard(3, 3);
+  const tile1 = testBoard.board[1][2];
+  const tile2 = testBoard.board[2][2];
+
+  const testShip = new Ship(2);
+  testBoard.placeShip(testShip, "horizontal", 1, 2);
+
+  testBoard.receiveAttack(tile1);
+  testBoard.receiveAttack(tile2);
+
+  // the ship should be sunk after taking 2 hits
+  expect(tile1.shipInfo.ship?.sunk).toBe(true);
 });

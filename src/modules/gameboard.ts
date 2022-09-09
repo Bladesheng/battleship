@@ -57,6 +57,32 @@ export class Gameboard {
     shipInfo.hullIndex = hullIndex;
   }
 
+  placeShip(
+    ship: Ship,
+    direction: "horizontal" | "vertical",
+    xCoords: number,
+    yCoords: number
+  ) {
+    const length = ship.length;
+
+    // select the tiles where ship will be placed
+    const tiles: Itile[] = [];
+    for (let i = 0; i < length; i++) {
+      if (direction === "horizontal") {
+        const tile = this.#board[xCoords + i][yCoords];
+        tiles.push(tile);
+      } else if (direction === "vertical") {
+        const tile = this.#board[xCoords][yCoords + i];
+        tiles.push(tile);
+      }
+    }
+
+    // place all hull parts
+    tiles.forEach((tile, hullIndex) => {
+      this.placeHullPart(ship, hullIndex, tile);
+    });
+  }
+
   get board() {
     return this.#board;
   }
